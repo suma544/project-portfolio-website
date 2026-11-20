@@ -19,8 +19,10 @@ def database_url() -> str:
     url = os.environ.get("DATABASE_URL", "").strip()
     if url:
         # Heroku / some hosts still hand out the old "postgres://" scheme
-        if url.startswith("postgres://"):
-            url = url.replace("postgres://", "postgresql://", 1)
+        # Use the psycopg2 driver (in requirements.txt) for plain postgres URLs from Neon / Heroku
+        for prefix in ("postgres://", "postgresql://"):
+            if url.startswith(prefix):
+                url = "postgresql+psycopg2://" + url[len(prefix):]
         return url
     # Local fallback (Vercel only allows writing to /tmp)
     folder = "/tmp" if os.environ.get("VERCEL") else BASE_DIR
