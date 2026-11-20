@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="/">Portfolio<span>.</span></a>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#about">Stack</a>
+        <button class="btn btn-primary" id="openForm">+ Add Project</button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Full-Stack Developer</p>
+      <h1>Projects I've designed, built and shipped.</h1>
+      <p class="lead">Every project on this page is stored in a SQL database and served through a Flask REST API.</p>
+      <div class="stats">
+        <div><strong id="statTotal">0</strong><span>Projects</span></div>
+        <div><strong id="statDone">0</strong><span>Completed</span></div>
+        <div><strong id="statTech">0</strong><span>Technologies</span></div>
+      </div>
+    </div>
+  </section>
+
+  <main id="projects" class="container">
+    <div class="toolbar">
+      <input type="search" id="search" placeholder="Search by title, description or tech..." />
+      <div class="filters" id="filters"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="empty" id="empty" hidden>No projects found.</p>
+  </main>
+
+  <section id="about" class="container about">
+    <h2>Tech stack</h2>
+    <div class="stack">
+      <div><h3>Frontend</h3><p>HTML5, CSS3, Vanilla JavaScript</p></div>
+      <div><h3>Backend</h3><p>Python, Flask, REST API</p></div>
+      <div><h3>Database</h3><p>PostgreSQL / MySQL via SQLAlchemy</p></div>
+      <div><h3>Hosting</h3><p>Vercel or Heroku</p></div>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="container">© <span id="year"></span> Project Portfolio</div></footer>
+
+  <dialog id="formDialog">
+    <form id="projectForm" method="dialog">
+      <h2 id="formTitle">Add project</h2>
+      <label>Title*<input name="title" required maxlength="120" /></label>
+      <label>Description*<textarea name="description" rows="3" required></textarea></label>
+      <label>Tech stack (comma separated)<input name="tech_stack" placeholder="React, Node.js, MongoDB" /></label>
+      <div class="row">
+        <label>Category<input name="category" value="Web" /></label>
+        <label>Status
+          <select name="status"><option>Completed</option><option>In Progress</option><option>Planned</option></select>
+        </label>
+      </div>
+      <label>GitHub URL<input name="github_url" type="url" placeholder="https://github.com/..." /></label>
+      <label>Live URL<input name="live_url" type="url" placeholder="https://..." /></label>
+      <label>Admin key (only if the server sets one)<input name="admin_key" type="password" autocomplete="off" /></label>
+      <p class="error" id="formError"></p>
+      <div class="actions">
+        <button type="button" class="btn" id="cancelForm">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
